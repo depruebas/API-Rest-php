@@ -6,20 +6,13 @@ class PDOClass2
 {
 
   protected static $conn = null;
-  protected static $pathLogs = null;
-
-  function __construct() {
-
-    $pathLogs = dirname( dirname( __FILE__)) . '/logs/';
-
-  }
 
   public static function Connection( $config = array())
   {
 
     if ( empty( $config))
     {
-      error_log( date("Y-m-d H:i:s") . " - Config file empty \n", 3, static::$pathLogs."db_error.log");
+      error_log( date("Y-m-d H:i:s") . " - Config file empty \n", 3, ConfigClass::get("config.ruta_logs")['error_log']."db_error.log");
       $return = array(
         'success' => false,
         'data' => 'Config file empty',
@@ -40,7 +33,7 @@ class PDOClass2
 
       $_error = print_r( $e->getTrace(), true) . "\n" . $e->getMessage();
 
-      error_log( date("Y-m-d H:i:s") . " - " . $_error . "\n", 3, static::$pathLogs."db_error.log");
+      error_log( date("Y-m-d H:i:s") . " - " . $_error . "\n", 3, ConfigClass::get("config.ruta_logs")['error_log']."db_error.log");
       $return = array(
         'success' => false,
         'data' => $_error,
@@ -74,7 +67,7 @@ class PDOClass2
     {
       $_error = print_r( $e->getTrace(), true) . "\n" . $e->getMessage();
 
-      error_log( date("Y-m-d H:i:s") . " - " . $_error . "\n", 3, static::$pathLogs."db_error.log");
+      error_log( date("Y-m-d H:i:s") . " - " . $_error . "\n", 3, ConfigClass::get("config.ruta_logs")['error_log']."db_error.log");
       $return = array(
         'success' => false,
         'data' => $_error,
@@ -101,7 +94,7 @@ class PDOClass2
     {
       $_error = print_r( $e->getTrace(), true) . "\n" . $e->getMessage();
 
-      error_log( date("Y-m-d H:i:s") . " - " . $_error . "\n", 3, static::$pathLogs."db_error.log");
+      error_log( date("Y-m-d H:i:s") . " - " . $_error . "\n", 3, ConfigClass::get("config.ruta_logs")['error_log']."db_error.log");
       $return = array(
         'success' => false,
         'data' => $_error,
@@ -156,7 +149,7 @@ class PDOClass2
 
       $_error = print_r( $e->getTrace(), true) . "\n" . $e->getMessage();
 
-      error_log( date("Y-m-d H:i:s") . " - " . $_error . "\n", 3, static::$pathLogs."db_error.log");
+      error_log( date("Y-m-d H:i:s") . " - " . $_error . "\n", 3, ConfigClass::get("config.ruta_logs")['error_log']."db_error.log");
       $return = array(
         'success' => false,
         'data' => $_error,

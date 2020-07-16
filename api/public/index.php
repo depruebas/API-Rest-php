@@ -23,8 +23,9 @@
   require_once dirname( dirname(__FILE__))."/libs/CustomErrorLog.php";
   require_once dirname( dirname(__FILE__))."/libs/PDOClass2.php";
   require_once dirname( dirname(__FILE__))."/libs/MessagesClass.php";
+  require_once dirname( dirname(__FILE__))."/libs/Authorization.php";
   require_once dirname( dirname(__FILE__))."/libs/APIManager.php";
-  require_once dirname( dirname(__FILE__))."/libs/Router.php";
+
 
   # Inicializamos CustomErrorLog, para procesar automaticamente los errores
   $e = new CustomErrorLog();
@@ -35,6 +36,7 @@
   define( 'ENVIRONMENT', ConfigClass::get("config.environment"));
   define( "CODE_ERROR", strtoupper( RandomString( 10)));
   define( "EOF", "\n");
+
 
   # Abrimos la conexión a la base de datos para poder trabajar con ella en toda la aplicacion
 	$_config = ConfigClass::get("config.database")['cars'];
@@ -49,6 +51,7 @@
 
   # Enviamos el resultado de la de proceso de la API a quien ha hecho la peticion
   echo $return;
+
 
   # Si tenemos la depuración activada se registra el tiempo que tarda en procesar las peticiones
   if ( DEBUG)

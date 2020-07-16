@@ -6,7 +6,7 @@
 
       'cars' => array(
         'dsn' => 'mysql:host=localhost;dbname=API_CARS;charset=utf8mb4',
-        'username' => 'dev',
+        'username' => 'root',
         'password' => 'mysql',
       ),
 
@@ -24,7 +24,7 @@
     # Keys necesarias para validar la API y el usuario que  hace la petición
     # En lugar de poner usuario y password podemos poner token y token_secret si en lugar
     # de usuarios estamos trabajando con dispositivos IoT
-    'keys' => array( 'api_key', 'api_key_secret', 'username', 'password', 'api_name' ),
+    'keys' => array( 'api_key', 'api_key_secret', 'username', 'password', 'api_name', 'access_token' ),
 
     # 0 - no depuración / 1 - depuración
     'debug' => 1,
