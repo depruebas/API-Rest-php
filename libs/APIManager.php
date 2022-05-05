@@ -13,14 +13,14 @@ Class APIManager
 		if ( ConfigClass::get("config.api_version") != $uri['0'])
 		{
 
-			return ( MessagesClass::Response( array(
+			return ( MessagesClass::Response([
 	        'success' => false,
 	        'type' => 'ERROR',
 	        'code' => 'AUTH0001-' . CODE_ERROR,
 	        'http_code' => 'HTTP/1.1 404  Not Found',
 	        'message' => ConfigClass::get("messages.AUTH0001"),
-	      )
-	    ));
+				])
+			);
 
 		}
 
@@ -64,14 +64,14 @@ Class APIManager
     if ( !$isvalid_access_token)
     {
 
-    	return ( MessagesClass::Response( array(
+    	return ( MessagesClass::Response([
 	        'success' => false,
 	        'type' => 'ERROR',
 	        'code' => 'AUTH0006-' . CODE_ERROR,
 	        'http_code' => 'HTTP/1.1 401 Unauthorized',
 	        'message' => ConfigClass::get("messages.AUTH0006"),
-	      )
-	    ));
+				])
+			);
 
     }
 
@@ -82,14 +82,14 @@ Class APIManager
     if ( !in_array( $method, ConfigClass::get("config.methods")))
     {
 
-      return ( MessagesClass::Response( array(
+      return ( MessagesClass::Response( [
           'success' => false,
           'type' => 'ERROR',
           'code' => 'AUTH0002-' . CODE_ERROR,
           'http_code' => 'HTTP/1.1 405 Method Not Allowed',
           'message' => str_replace( "#", $method, ConfigClass::get("messages.AUTH0002")),
-        )
-      ));
+				])
+			);
 
     }
 
@@ -117,8 +117,7 @@ Class APIManager
     		break;
 
     }
-
-
+		
 	}
 
 }

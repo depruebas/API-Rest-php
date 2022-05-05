@@ -3,7 +3,6 @@
 	# Iniciamos el timer para ver el tiempo que tarda la api en procesar una peticíon
   $start_time = microtime(true);
 
-
   # Guardamos la fecha con la que se inicia la API en cada petición, despues la utilizaremos en los
   # logs para saber cuando fue la petición
   global $init_time;
@@ -21,7 +20,7 @@
   require_once dirname( dirname(__FILE__))."/libs/ConfigClass.php";
   require_once dirname( dirname(__FILE__))."/libs/Utils.php";
   require_once dirname( dirname(__FILE__))."/libs/CustomErrorLog.php";
-  require_once dirname( dirname(__FILE__))."/libs/PDOClass2.php";
+  require_once dirname( dirname(__FILE__))."/libs/PDOManager.php";
   require_once dirname( dirname(__FILE__))."/libs/MessagesClass.php";
   require_once dirname( dirname(__FILE__))."/libs/Authorization.php";
   require_once dirname( dirname(__FILE__))."/libs/APIManager.php";
@@ -34,24 +33,21 @@
   # Defimos las costantes del programa
   define( 'DEBUG', ConfigClass::get("config.debug"));
   define( 'ENVIRONMENT', ConfigClass::get("config.environment"));
-  define( "CODE_ERROR", strtoupper( RandomString( 10)));
+  define( "CODE_ERROR", strtoupper( RandomString( 15)));
   define( "EOF", "\n");
 
 
   # Abrimos la conexión a la base de datos para poder trabajar con ella en toda la aplicacion
-	$_config = ConfigClass::get("config.database")['cars'];
-  PDOClass2::Connection( $_config);
+	// $_config = ConfigClass::get("config.database")['cars'];
+  // PDOClass2::Connection( $_config);
 
   # Instanciamos la clase Core que es la que verificaras las rutas, la autenficacion y las acciones
   # a realizar por la API
   $core = new APIManager();
   $return = $core->Init();
 
-  PDOClass2::Close();
-
   # Enviamos el resultado de la de proceso de la API a quien ha hecho la peticion
   echo $return;
-
 
   # Si tenemos la depuración activada se registra el tiempo que tarda en procesar las peticiones
   if ( DEBUG)

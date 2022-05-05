@@ -3,7 +3,6 @@
 class Authorization
 {
 
-
   public function ValidateKeys( $data_keys)
   {
 
@@ -13,7 +12,6 @@ class Authorization
   	$access = true;
   	$keys = ConfigClass::get("config.keys");
   	unset( $keys[5]);
-
 
   	foreach ( $keys as $key)
   	{

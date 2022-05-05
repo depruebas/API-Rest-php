@@ -2,22 +2,22 @@
 
 # https://github.com/depruebas/PDOManager
 #
-class PDOClass2
+class PDOManager
 {
 
   protected static $conn = null;
 
-  public static function Connection( $config = array())
+  public static function Connection( $config = [])
   {
 
     if ( empty( $config))
     {
       error_log( date("Y-m-d H:i:s") . " - Config file empty \n", 3, ConfigClass::get("config.ruta_logs")['error_log']."db_error.log");
-      $return = array(
+      $return = [
         'success' => false,
         'data' => 'Config file empty',
-      );
-      return ( array( 'success' => false, 'data' => $return));
+      ];
+      return ( [ 'success' => false, 'data' => $return]);
     }
 
     try
@@ -25,7 +25,7 @@ class PDOClass2
       self::$conn = new PDO( $config['dsn'], $config['username'], $config['password']);
       self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-      return ( array( 'success' => true, 'data' => self::$conn));
+      return ( [ 'success' => true, 'data' => self::$conn]);
 
     }
     catch (PDOException $e)
@@ -34,11 +34,12 @@ class PDOClass2
       $_error = print_r( $e->getTrace(), true) . "\n" . $e->getMessage();
 
       error_log( date("Y-m-d H:i:s") . " - " . $_error . "\n", 3, ConfigClass::get("config.ruta_logs")['error_log']."db_error.log");
-      $return = array(
+      $return = [
         'success' => false,
         'data' => $_error,
-      );
-      return ( array( 'success' => false, 'data' => $return));
+      ];
+
+      return ( [ 'success' => false, 'data' => $return]);
     }
 
   }
@@ -50,7 +51,7 @@ class PDOClass2
 
   }
 
-  public static function ExecuteQuery( $params = array())
+  public static function ExecuteQuery( $params = [])
   {
 
    try
@@ -61,17 +62,17 @@ class PDOClass2
       $count = $stmt->rowCount();
       $stmt->closeCursor();
 
-      $return = array( 'success' => true, 'data' => $data, 'count' => $count);
+      $return = [ 'success' => true, 'data' => $data, 'count' => $count];
     }
     catch (PDOException $e)
     {
       $_error = print_r( $e->getTrace(), true) . "\n" . $e->getMessage();
 
       error_log( date("Y-m-d H:i:s") . " - " . $_error . "\n", 3, ConfigClass::get("config.ruta_logs")['error_log']."db_error.log");
-      $return = array(
+      $return = [
         'success' => false,
         'data' => $_error,
-      );
+      ];
     }
 
     unset ( $stmt);
@@ -79,7 +80,7 @@ class PDOClass2
     return ( $return);
   }
 
-  public static function Execute( $params = array())
+  public static function Execute( $params = [])
   {
 
     try
@@ -88,17 +89,17 @@ class PDOClass2
       $stmt->execute( $params['params'] );
       $count = $stmt->rowCount();
 
-      $return = array( 'success' => true, 'count' => $count);
+      $return = [ 'success' => true, 'count' => $count];
     }
     catch (PDOException $e)
     {
       $_error = print_r( $e->getTrace(), true) . "\n" . $e->getMessage();
 
       error_log( date("Y-m-d H:i:s") . " - " . $_error . "\n", 3, ConfigClass::get("config.ruta_logs")['error_log']."db_error.log");
-      $return = array(
+      $return = [
         'success' => false,
         'data' => $_error,
-      );
+      ];
     }
 
     unset ( $stmt);
@@ -107,7 +108,7 @@ class PDOClass2
 
   }
 
-  public static function Insert( $params = array())
+  public static function Insert( $params = [])
   {
 
     if ( empty( self::$conn))
@@ -116,7 +117,7 @@ class PDOClass2
       self::Connection( $config_db);
     }
 
-    $data = array();
+    $data = [];
     $fields = $fields_values = $a_values = "";
 
     foreach ( $params['fields'] as $key => $value)
@@ -141,7 +142,7 @@ class PDOClass2
       $count = $stmt->rowCount();
       $id = self::$conn->lastInsertId();
 
-      $return = array( 'success' => true, 'data' => $data, 'last_id' =>  $id, 'count' => $count);
+      $return = [ 'success' => true, 'data' => $data, 'last_id' =>  $id, 'count' => $count];
 
     }
     catch (PDOException $e)
@@ -150,10 +151,10 @@ class PDOClass2
       $_error = print_r( $e->getTrace(), true) . "\n" . $e->getMessage();
 
       error_log( date("Y-m-d H:i:s") . " - " . $_error . "\n", 3, ConfigClass::get("config.ruta_logs")['error_log']."db_error.log");
-      $return = array(
+      $return = [
         'success' => false,
         'data' => $_error,
-      );
+      ];
 
     }
 
