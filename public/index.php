@@ -22,7 +22,7 @@
   require_once dirname( dirname(__FILE__))."/libs/CustomErrorLog.php";
   require_once dirname( dirname(__FILE__))."/libs/PDOManager.php";
   require_once dirname( dirname(__FILE__))."/libs/MessagesClass.php";
-  require_once dirname( dirname(__FILE__))."/libs/Authorization.php";
+  require_once dirname( dirname(__FILE__))."/libs/Autenticacion.php";
   require_once dirname( dirname(__FILE__))."/libs/APIManager.php";
 
 

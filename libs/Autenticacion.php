@@ -59,11 +59,12 @@ class Authorization
                           INNER JOIN auth_users as c On b.user_id = c.id
                           WHERE a.api_key = ? And a.api_key_secret = ? And a.enabled = 1  And a.api_name = ?
                             And c.username = ? And c.password = ? And c.enabled = 1";
-    $params['params'] = array( $data_keys['api_key'],
-    													$data_keys['api_key_secret'],
-    													$data_keys['api_name'],
-    													$data_keys['username'],
-    													$data_keys['password']);
+    $params['params'] = [ $data_keys['api_key'],
+													$data_keys['api_key_secret'],
+													$data_keys['api_name'],
+													$data_keys['username'],
+													$data_keys['password']
+												];
     $rows = PDOClass2::ExecuteQuery( $params);
 
 
